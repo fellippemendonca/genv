@@ -1,12 +1,11 @@
-package v1_test
+package env_test
 
 import (
 	"fmt"
 	"os"
 	"testing"
 
-	v1 "go-env/v1"
-
+	"github.com/fellippemendonca/go-env"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -27,7 +26,7 @@ func TestConfigLoad(t *testing.T) {
 	setEnv(expectedValues)
 	defer unsetEnv()
 	loadedConfig := &Config{}
-	assert.NoError(t, v1.Load(loadedConfig))
+	assert.NoError(t, env.Load(loadedConfig))
 	assert.Equal(t, expectedValues, loadedConfig)
 }
 
@@ -43,7 +42,7 @@ func TestConfigLoad_defaults(t *testing.T) {
 	os.Unsetenv("GO_ENV_SENTRY_SAMPLE_RATE")
 	defer unsetEnv()
 	loadedConfig := &Config{}
-	assert.NoError(t, v1.Load(loadedConfig))
+	assert.NoError(t, env.Load(loadedConfig))
 	assert.Equal(t, expectedValues, loadedConfig)
 }
 
@@ -52,7 +51,7 @@ func TestConfigLoad_required(t *testing.T) {
 	setEnv(envValues)
 	defer unsetEnv()
 	loadedConfig := &Config{}
-	assert.EqualError(t, v1.Load(loadedConfig), "required env var not set: GO_ENV_SENTRY_ENV")
+	assert.EqualError(t, env.Load(loadedConfig), "required env var not set: GO_ENV_SENTRY_ENV")
 }
 
 func setEnv(cfg *Config) {

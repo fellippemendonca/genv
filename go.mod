@@ -1,4 +1,4 @@
-module go-env
+module github.com/fellippemendonca/go-env
 
 go 1.24.1
 
