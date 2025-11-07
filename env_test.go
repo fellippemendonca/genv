@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fellippemendonca/go-env"
+	"github.com/fellippemendonca/genv"
 	"github.com/stretchr/testify/assert"
 )
 
