@@ -26,7 +26,7 @@ func TestConfigLoad(t *testing.T) {
 	setEnv(expectedValues)
 	defer unsetEnv()
 	loadedConfig := &Config{}
-	assert.NoError(t, env.Load(loadedConfig))
+	assert.NoError(t, genv.Load(loadedConfig))
 	assert.Equal(t, expectedValues, loadedConfig)
 }
 
@@ -42,7 +42,7 @@ func TestConfigLoad_defaults(t *testing.T) {
 	os.Unsetenv("GO_ENV_SENTRY_SAMPLE_RATE")
 	defer unsetEnv()
 	loadedConfig := &Config{}
-	assert.NoError(t, env.Load(loadedConfig))
+	assert.NoError(t, genv.Load(loadedConfig))
 	assert.Equal(t, expectedValues, loadedConfig)
 }
 
@@ -51,7 +51,7 @@ func TestConfigLoad_required(t *testing.T) {
 	setEnv(envValues)
 	defer unsetEnv()
 	loadedConfig := &Config{}
-	assert.EqualError(t, env.Load(loadedConfig), "required env var not set: GO_ENV_SENTRY_ENV")
+	assert.EqualError(t, genv.Load(loadedConfig), "required env var not set: GO_ENV_SENTRY_ENV")
 }
 
 func setEnv(cfg *Config) {
